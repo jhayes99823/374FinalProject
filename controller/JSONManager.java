@@ -41,7 +41,7 @@ public class JSONManager {
 		int status = (int)(long)jsonObject.get("status");
 		String errordesc = (String)jsonObject.get("errordesc");
 		Object obj = jsonObject.get("errorcode");
-		int errorcode = obj==null ? -1 : (int) obj;
+		int errorcode = obj==null ? -1 : (int)(long) obj;
 		return new ControllerResponse(orderID, status, errordesc, errorcode);
 	}
 	public static String createCommmandStream(Order order, Machine machine) {
