@@ -9,7 +9,7 @@ public class RequestManager {
 		// Communicate with ControllerManager
 		// to send request to machine and get
 		// response back
-		String controllerRespString = ControllerManager.dispatchCommand(JSONManager.createCommmandStream(order, machine), machine.getID()); // = result of ControllerManager call
+		String controllerRespString =ControllerManager.dispatchCommand(JSONManager.createCommmandStream(order, machine), machine.getID());
 		ControllerResponse controllerResponse = JSONManager.parseControllerResponse(controllerRespString);
 		String appResponse = JSONManager.createAppResponse(controllerResponse, machine);
 		return appResponse;
