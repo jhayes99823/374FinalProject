@@ -1,10 +1,15 @@
+package controller;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import models.Address;
 import models.Capability;
+import models.CoffeeController;
 import models.Machine;
+import models.Order;
 
 public class DatabaseConnection {
 	private static final String CONNECTION = "TEST_CONN";
