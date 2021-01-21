@@ -5,6 +5,13 @@ public class ControllerResponse {
 	private String errordesc;
 	private int errorcode;
 	
+	public ControllerResponse(int orderID, int status, String errordesc, int errorcode) {
+		this.orderID = orderID;
+		this.status = status;
+		this.errordesc = errordesc;
+		this.errorcode = errorcode;
+	}
+	
 	public int getOrderID() {
 		return this.orderID;
 	}
