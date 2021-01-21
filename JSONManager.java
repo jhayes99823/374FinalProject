@@ -7,7 +7,7 @@ import org.json.simple.JSONValue;
 
 public class JSONManager {
 
-	public Order parseOrderInput(String json) {
+	public static Order parseOrderInput(String json) {
 		JSONObject jsonObject = (JSONObject) JSONValue.parse(json);
 		jsonObject = (JSONObject) jsonObject.get("order");
 		int orderID = (int)(long)jsonObject.get("orderID");
@@ -27,7 +27,7 @@ public class JSONManager {
 		return new Order(orderID, address, drink, condiments);
 	}
 	
-	public ControllerResponse parseControllerResponse(String json) {
+	public static ControllerResponse parseControllerResponse(String json) {
 		JSONObject jsonObject = (JSONObject) JSONValue.parse(json);
 		jsonObject = (JSONObject) jsonObject.get("drinkresponse");
 		int orderID = (int)(long)jsonObject.get("orderID");
@@ -37,25 +37,55 @@ public class JSONManager {
 		int errorcode = obj==null ? -1 : (int) obj;
 		return new ControllerResponse(orderID, status, errordesc, errorcode);
 	}
-	public String createCommmandStream(Order order, Machine machine) {
-		return null;
+	public static String createCommmandStream(Order order, Machine machine) {
+		JSONObject jsonCommand = new JSONObject();
+		JSONObject commandBody = new JSONObject();
+		commandBody.put("controller_id", machine.getController().getID());
+		commandBody.put("coffee_machine_id", machine.getID());
+		commandBody.put("orderID", order.getOrderID());
+		commandBody.put("DrinkName", order.getDrink());
+		commandBody.put("Requesttype", "SOMETHING"); //NEEDS TO BE FIXED
+		JSONArray condimentsArray = new JSONArray();
+		for(int i = 0; i < order.getCondiments().size(); i++) {
+			JSONObject condiment = new JSONObject();
+			condiment.put("Name",order.getCondiment(i).getName());
+			condiment.put("qty", order.getCondiment(i).getQuantity());
+			condimentsArray.add(condiment);
+		}
+		commandBody.put("Options:", condimentsArray);
+		jsonCommand.put("command", commandBody);
+		return jsonCommand.toString();
 	}
 	
-	public String createAppResponse(ControllerResponse controllerResponse, Machine machine) {
-		return null;
+	public static String createAppResponse(ControllerResponse controllerResponse, Machine machine) {
+		JSONObject jsonResponse = new JSONObject();
+		JSONObject responseBody = new JSONObject();
+		responseBody.put("orderID", controllerResponse.getOrderID());
+		responseBody.put("coffee_machine_id", machine.getID());
+		responseBody.put("status", controllerResponse.getStatus());
+		if(controllerResponse.getStatus()==0) {
+			responseBody.put("status-message", "Your coffee has been prepared with your desired options.");
+		}else {
+			responseBody.put("status-message", "Your coffee order has been cancelled.");
+			responseBody.put("error-message", controllerResponse.getErrorDesc());
+		}
+		jsonResponse.put("user-response", responseBody);
+		return jsonResponse.toString();
 	}
 	
 	public static void main(String args[]) {
-		JSONManager manager = new JSONManager();
-		ControllerResponse response = manager.parseControllerResponse("{\r\n" + 
-				"  \"drinkresponse\": {\r\n" + 
-				"    \"orderID\": 1,\r\n" + 
-				"    \"status\": 0\r\n" + 
-				"  }\r\n" + 
-				"}");
-		System.out.println(response.getOrderID());
-		System.out.println(response.getStatus());
-		System.out.println(response.getErrorDesc());
-		System.out.println(response.getErrorCode());
+		Address address = new Address("200 N Main", 47803); 
+		List<Condiment> condiments = new ArrayList<Condiment>();
+		condiments.add(new Condiment("Cream", 2));
+		condiments.add(new Condiment("Sugar", 1));
+		List<Capability> capabilities = new ArrayList<Capability>();
+		capabilities.add(Capability.Automated);
+		capabilities.add(Capability.Simple);
+		System.out.println(createCommmandStream(
+				new Order(1, address, "Americano", condiments),
+				new Machine(1, new CoffeeController(2, "Advanced", address), capabilities)));
+		System.out.println(createAppResponse(
+				new ControllerResponse(1, 1, "Out of milk, drink cancelled.", 2),
+				new Machine(1, new CoffeeController(2, "Advanced", address), capabilities)));
 	}
 }
