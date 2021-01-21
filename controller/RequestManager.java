@@ -10,6 +10,9 @@ public class RequestManager {
 	public String handleRequest(String json) {
 		Order order = JSONManager.parseOrderInput(json);
 		Machine machine = performSelection(order);
+		if(machine==null) {
+			return "No machine found";
+		}
 		// Communicate with ControllerManager
 		// to send request to machine and get
 		// response back
