@@ -1,4 +1,4 @@
 
 public interface Observer {
-	public void notify(Order order, Machine machine)
-
+	public void notify(Order order, Machine machine);
+}
