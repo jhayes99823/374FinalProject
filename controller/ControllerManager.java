@@ -1,3 +1,4 @@
+package controller;
 
 public class ControllerManager {
 	private static final int WAIT_TIME = 3;

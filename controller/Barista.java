@@ -1,3 +1,6 @@
+package controller;
+import models.Machine;
+import models.Order;
 
 public class Barista implements Observer {
 

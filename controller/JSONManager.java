@@ -1,9 +1,16 @@
-import java.util.ArrayList;
+package controller;
+ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+
+import models.Address;
+import models.Condiment;
+import models.ControllerResponse;
+import models.Machine;
+import models.Order;
 
 public class JSONManager {
 

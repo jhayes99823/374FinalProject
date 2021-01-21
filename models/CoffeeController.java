@@ -1,3 +1,5 @@
+package models;
+
 
 public class CoffeeController {
 	private int id;

@@ -1,3 +1,4 @@
+package models;
 
 public class ControllerResponse {
 	private int orderID;

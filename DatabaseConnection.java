@@ -1,5 +1,8 @@
 import java.util.List;
 
+import models.Machine;
+import models.Order;
+
 public class DatabaseConnection {
 	private static final String CONNECTION = "TEST_CONN";
 	

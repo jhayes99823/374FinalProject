@@ -1,3 +1,9 @@
+import controller.JSONManager;
+import controller.MachineSelectionBehavior;
+import controller.NotificationManager;
+import models.ControllerResponse;
+import models.Machine;
+import models.Order;
 
 public class RequestManager {
 	MachineSelectionBehavior selectionBehavior;
