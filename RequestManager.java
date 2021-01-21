@@ -1,3 +1,4 @@
+import controller.ControllerManager;
 import controller.JSONManager;
 import controller.MachineSelectionBehavior;
 import controller.NotificationManager;
@@ -15,7 +16,8 @@ public class RequestManager {
 		// Communicate with ControllerManager
 		// to send request to machine and get
 		// response back
-		String controllerRespString =ControllerManager.dispatchCommand(JSONManager.createCommmandStream(order, machine), machine.getID());
+		String commandStream = JSONManager.createCommmandStream(order, machine);
+		String controllerRespString = ControllerManager.dispatchCommand(commandStream, machine.getID());
 		ControllerResponse controllerResponse = JSONManager.parseControllerResponse(controllerRespString);
 		String appResponse = JSONManager.createAppResponse(controllerResponse, machine);
 		return appResponse;
