@@ -41,13 +41,13 @@ public class ControllerManager {
 		return response;
 	}
 	
-	public static String dispatchCommand(String commandString, int controllerID) {
+	public static String dispatchCommand(String commandString, int orderId) {
 		String[] output = {null};
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					output[0] = getControllerInfo(controllerID);
+					output[0] = getControllerInfo(orderId);
 				} catch (InterruptedException e) {
 				}
 			}
@@ -61,7 +61,7 @@ public class ControllerManager {
 		}
 		thread.interrupt();
 		if(output[0]==null) {
-			output[0] = "{\"drinkresponse\":{\"orderID\":"+controllerID+",\"status\":1,\"errordesc\":\"Machine not responding.\",\"errorcode\":1}}";
+			output[0] = "{\"drinkresponse\":{\"orderID\":"+orderId+",\"status\":1,\"errordesc\":\"Machine not responding.\",\"errorcode\":1}}";
 		}
 		return output[0];
 	}

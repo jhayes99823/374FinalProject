@@ -17,7 +17,7 @@ public class RequestManager {
 		// to send request to machine and get
 		// response back
 		String commandStream = JSONManager.createCommmandStream(order, machine);
-		String controllerRespString = ControllerManager.dispatchCommand(commandStream, machine.getID());
+		String controllerRespString = ControllerManager.dispatchCommand(commandStream, order.getOrderID());
 		ControllerResponse controllerResponse = JSONManager.parseControllerResponse(controllerRespString);
 		String appResponse = JSONManager.createAppResponse(controllerResponse, machine);
 		return appResponse;

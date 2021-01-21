@@ -44,7 +44,7 @@ public class TestingMain {
 	public static void main(String[] args) {
 		RequestManager manager = new RequestManager();
 		manager.setSelectionBehavior(new ConcreteSelectionBehavior());
-		String response = manager.handleRequest(jsons[0]);
+		String response = manager.handleRequest(jsons[1]);
 		System.out.println(response);
 	}
 
