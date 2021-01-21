@@ -1,7 +1,9 @@
 
 public class ControllerManager {
+	private static final int WAIT_TIME = 3;
+	
 	public static String getControllerInfo(int orderId) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		String response = null;
 		switch(orderId) {
 			case 1:
@@ -11,6 +13,7 @@ public class ControllerManager {
 						+ "    \"status\": 0\n"
 						+ "  }\n"
 						+ "}";
+				break;
 			case 2:
 				response = "{\n"
 						+ "  \"drinkresponse\": {\n"
@@ -20,7 +23,9 @@ public class ControllerManager {
 						+ "    \"errorcode\": 2\n"
 						+ "  }\n"
 						+ "}";
+				break;
 			case 3:
+				Thread.sleep(5000);
 				response = "{\n"
 						+ "  \"drinkresponse\": {\n"
 						+ "    \"orderID\": 3,\n"
@@ -30,11 +35,33 @@ public class ControllerManager {
 						+ "  }\n"
 						+ "}\n"
 						+ "";
+				break;
 		}
 		return response;
 	}
 	
-	public static String dispatchCommand(String commandString) {
-		return getControllerInfo(0)
+	public static String dispatchCommand(String commandString, int controllerID) {
+		String[] output = {null};
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					output[0] = getControllerInfo(controllerID);
+				} catch (InterruptedException e) {
+				}
+			}
+		});
+		thread.start();
+		long startTime = System.currentTimeMillis();
+		while(startTime+WAIT_TIME*1000 >= System.currentTimeMillis()) {
+			if(output[0]!=null) {
+				break;
+			}
+		}
+		thread.interrupt();
+		if(output[0]==null) {
+			output[0] = "{\"drinkresponse\":{\"orderID\":"+controllerID+",\"status\":1,\"errordesc\":\"Machine not responding.\",\"errorcode\":1}}";
+		}
+		return output[0];
 	}
 }
