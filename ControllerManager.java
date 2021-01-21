@@ -1,6 +1,6 @@
 
 public class ControllerManager {
-	public static String GetControllerInfo(int orderId) throws InterruptedException {
+	public static String getControllerInfo(int orderId) throws InterruptedException {
 		Thread.sleep(2000);
 		String response = null;
 		switch(orderId) {
@@ -32,5 +32,9 @@ public class ControllerManager {
 						+ "";
 		}
 		return response;
+	}
+	
+	public static String dispatchCommand(String commandString) {
+		return getControllerInfo(0)
 	}
 }
