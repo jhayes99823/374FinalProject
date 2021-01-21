@@ -17,17 +17,25 @@ public class JSONManager {
 		String drink = (String)jsonObject.get("drink");
 		JSONArray condimentsArray = (JSONArray)jsonObject.get("condiments");
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		for(int i = 0; i < condimentsArray.size(); i++) {
-			String condimentName = (String)((JSONObject)condimentsArray.get(i)).get("name");
-			int condimentQty = (int)(long)((JSONObject)condimentsArray.get(i)).get("qty");
-			condiments.add(new Condiment(condimentName, condimentQty));
+		if(condimentsArray!=null) {
+			for (int i = 0; i < condimentsArray.size(); i++) {
+				String condimentName = (String) ((JSONObject) condimentsArray.get(i)).get("name");
+				int condimentQty = (int) (long) ((JSONObject) condimentsArray.get(i)).get("qty");
+				condiments.add(new Condiment(condimentName, condimentQty));
+			}
 		}
-		Order order = new Order(orderID, address, drink, condiments);
-		return order;
+		return new Order(orderID, address, drink, condiments);
 	}
 	
 	public ControllerResponse parseControllerResponse(String json) {
-		return null;
+		JSONObject jsonObject = (JSONObject) JSONValue.parse(json);
+		jsonObject = (JSONObject) jsonObject.get("drinkresponse");
+		int orderID = (int)(long)jsonObject.get("orderID");
+		int status = (int)(long)jsonObject.get("status");
+		String errordesc = (String)jsonObject.get("errordesc");
+		Object obj = jsonObject.get("errorcode");
+		int errorcode = obj==null ? -1 : (int) obj;
+		return new ControllerResponse(orderID, status, errordesc, errorcode);
 	}
 	public String createCommmandStream(Order order, Machine machine) {
 		return null;
@@ -39,24 +47,15 @@ public class JSONManager {
 	
 	public static void main(String args[]) {
 		JSONManager manager = new JSONManager();
-		Order order = manager.parseOrderInput("{\r\n" + 
-				"  \"order\": { \"orderID\": 1,\r\n" + 
-				"            \"address\": {\r\n" + 
-				"                  \"street\": \"200 N Main\",\r\n" + 
-				"                  \"ZIP\": 47803\r\n" + 
-				"            },\r\n" + 
-				"            \"drink\": \"Americano\",\r\n" + 
-				"            \"condiments\": [\r\n" + 
-				"                {\"name\": \"Sugar\", \"qty\": 1},\r\n" + 
-				"                {\"name\": \"Cream\", \"qty\": 2}\r\n" + 
-				"            ]\r\n" + 
-				"            }\r\n" + 
+		ControllerResponse response = manager.parseControllerResponse("{\r\n" + 
+				"  \"drinkresponse\": {\r\n" + 
+				"    \"orderID\": 1,\r\n" + 
+				"    \"status\": 0\r\n" + 
+				"  }\r\n" + 
 				"}");
-		System.out.println(order.getOrderID());
-		System.out.println(order.getAddress().getStreet());
-		System.out.println(order.getAddress().getZIP());
-		System.out.println(order.getDrink());
-		System.out.println(order.getCondiment(0).getName());
-		System.out.println(order.getCondiment(1).getQuantity());
+		System.out.println(response.getOrderID());
+		System.out.println(response.getStatus());
+		System.out.println(response.getErrorDesc());
+		System.out.println(response.getErrorCode());
 	}
 }
