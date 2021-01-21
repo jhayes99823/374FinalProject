@@ -72,20 +72,4 @@ public class JSONManager {
 		jsonResponse.put("user-response", responseBody);
 		return jsonResponse.toString();
 	}
-	
-	public static void main(String args[]) {
-		Address address = new Address("200 N Main", 47803); 
-		List<Condiment> condiments = new ArrayList<Condiment>();
-		condiments.add(new Condiment("Cream", 2));
-		condiments.add(new Condiment("Sugar", 1));
-		List<Capability> capabilities = new ArrayList<Capability>();
-		capabilities.add(Capability.Automated);
-		capabilities.add(Capability.Simple);
-		System.out.println(createCommmandStream(
-				new Order(1, address, "Americano", condiments),
-				new Machine(1, new CoffeeController(2, "Advanced", address), capabilities)));
-		System.out.println(createAppResponse(
-				new ControllerResponse(1, 1, "Out of milk, drink cancelled.", 2),
-				new Machine(1, new CoffeeController(2, "Advanced", address), capabilities)));
-	}
 }
