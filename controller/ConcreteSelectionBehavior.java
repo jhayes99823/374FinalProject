@@ -8,7 +8,7 @@ import models.Order;
 public class ConcreteSelectionBehavior implements MachineSelectionBehavior {	
 	@Override
 	public Machine selectMachine(Order order) {
-		List<Machine> machines = new ArrayList<Machine>();//DatabaseConnection.getMachinesForOrder(order);
+		List<Machine> machines = DatabaseConnection.getMachinesForOrder(order);
 		if(machines.size() > 0) {
 			return machines.get(0);
 		}
