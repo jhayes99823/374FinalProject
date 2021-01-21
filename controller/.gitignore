@@ -7,3 +7,5 @@
 /NotificationManager.class
 /Observer.class
 /Subject.class
+/RequestManager.class
+/DatabaseConnection.class
