@@ -14,12 +14,18 @@ public class NotificationManager extends Subject {
 
 	@Override
 	public void removeObserver(Observer observer) {
-		observers.remove(observer);
+		int i = observers.indexOf(observer);
+		
+		if (i >= 0) {
+			observers.remove(i);
+		}
 	}
 
 	@Override
 	public void notifyObservers(Order order, Machine macine) {
-		// TODO
+		for (Observer observer : observers) {
+			observer.notify(order, macine);
+		}
 	}
 	
 	public List<Observer> getObservers() {
