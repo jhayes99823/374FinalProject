@@ -2,7 +2,7 @@
 public class ControllerManager {
 	private static final int WAIT_TIME = 3;
 	
-	public static String getControllerInfo(int orderId) throws InterruptedException {
+	private static String getControllerInfo(int orderId) throws InterruptedException {
 		Thread.sleep(1000);
 		String response = null;
 		switch(orderId) {
