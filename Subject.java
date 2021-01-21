@@ -1,5 +1,3 @@
-import java.util.List;
-
 public abstract class Subject {
 	public abstract void addObserver(Observer observer);
 	

@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationManager extends Subject {
 	private List<Observer> observers;
 
 	public NotificationManager() {
-		
+		observers = new ArrayList<Observer>();
 	}
 
 	@Override

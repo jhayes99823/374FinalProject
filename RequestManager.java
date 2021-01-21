@@ -13,6 +13,6 @@ public class RequestManager {
 	}
 	
 	public void setSelectionBehavior(MachineSelectionBehavior selectionBehavior) {
-		
+		this.selectionBehavior = selectionBehavior;
 	}
 }
