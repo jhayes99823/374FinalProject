@@ -1,16 +1,35 @@
 import java.util.List;
 
 public class Order {
-	private long orderID;
+	private int orderID;
 	private Address address;
 	private String drink;
 	private List<Condiment> condiments;
 	
-	public Order(long orderID /*, Address address, String drink, List<Condiment> condiments */) {
+	public Order(int orderID, Address address, String drink, List<Condiment> condiments) {
 		this.orderID = orderID;
+		this.address = address;
+		this.drink = drink;
+		this.condiments = condiments;
 	}
 	
-	public long getOrderID() {
+	public int getOrderID() {
 		return this.orderID;
+	}
+	
+	public Address getAddress() {
+		return this.address;
+	}
+	
+	public String getDrink() {
+		return this.drink;
+	}
+	
+	public List<Condiment> getCondiments() {
+		return this.condiments;
+	}
+	
+	public Condiment getCondiment(int index) {
+		return this.condiments.get(index);
 	}
 }
