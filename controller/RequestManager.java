@@ -11,7 +11,7 @@ public class RequestManager {
 
 	public String handleRequest(String json) {
 		Order order = JSONManager.parseOrderInput(json);
-		Machine machine = performSelection(order, null);
+		Machine machine = performSelection(order, null).get(0);
 		if(machine==null) {
 			return "No machine found";
 		}
