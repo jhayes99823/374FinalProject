@@ -25,7 +25,7 @@ public class MachineTypeSelectionBehavior implements MachineSelectionStrategy {
 				}
 			}
 		}
-		return null;
+		return selectedMachines;
 	}
 
 }
