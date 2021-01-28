@@ -18,5 +18,4 @@ public class AddressSelectionBehavior implements MachineSelectionStrategy {
 		
 		return filteredList;
 	}
-
 }

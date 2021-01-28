@@ -12,3 +12,4 @@
 /MachineSelectionStrategy.class
 /AddressSelectionBehavior.class
 /QueueSelectionBehavior.class
+/MinQueueSelectionBehavior.class

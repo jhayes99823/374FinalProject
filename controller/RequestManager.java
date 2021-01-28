@@ -6,12 +6,12 @@ import models.Machine;
 import models.Order;
 
 public class RequestManager {
-	MachineSelectionBehavior selectionStrategy;
+	MachineSelectionStrategy selectionStrategy;
 	NotificationManager notificationManager;
 
 	public String handleRequest(String json) {
 		Order order = JSONManager.parseOrderInput(json);
-		Machine machine = performSelection(order);
+		Machine machine = performSelection(order, null);
 		if(machine==null) {
 			return "No machine found";
 		}
@@ -25,7 +25,7 @@ public class RequestManager {
 		return appResponse;
 	}
 
-	public Machine performSelection(Order order, List<Machine> machines) {
+	public List<Machine> performSelection(Order order, List<Machine> machines) {
 		return selectionStrategy.selectMachines(order, machines);
 	}
 
