@@ -1,5 +1,5 @@
 package testing;
-import controller.ConcreteSelectionBehavior;
+import controller.AddressSelectionBehavior;
 import controller.RequestManager;
 
 public class TestingMain {
@@ -43,7 +43,7 @@ public class TestingMain {
 	
 	public static void main(String[] args) {
 		RequestManager manager = new RequestManager();
-		manager.setSelectionBehavior(new ConcreteSelectionBehavior());
+		manager.setSelectionBehavior(new AddressSelectionBehavior());
 		String response = manager.handleRequest(jsons[1]);
 		System.out.println(response);
 	}
