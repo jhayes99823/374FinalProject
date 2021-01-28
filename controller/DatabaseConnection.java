@@ -46,5 +46,20 @@ public class DatabaseConnection {
 	public static String getConnection() {
 		return CONNECTION;
 	}
+	
+	public static List<Machine> getMachines() {
+		List<Machine> addr1Machines = new ArrayList<Machine>();
+		String addr1 ="200 N Main, 47803";
+		List<Capability> machine1Cap = new ArrayList<Capability>();
+		machine1Cap.add(Capability.Simple);
+		List<Capability> machine2Cap = new ArrayList<Capability>();
+		machine2Cap.add(Capability.Automated);
+		Machine machine1 = new Machine(1, new CoffeeController(1, "Simple", new Address("200 N Main", 47803)), machine1Cap);
+		addr1Machines.add(machine1);
+		
+		Machine machine2 = new Machine(2, new CoffeeController(1, "Automated", new Address("200 N Main", 47803)), machine2Cap);
+		addr1Machines.add(machine2);
+		return addr1Machines;
+	}
 
 }

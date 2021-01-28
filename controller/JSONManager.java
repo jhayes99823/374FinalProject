@@ -51,15 +51,19 @@ public class JSONManager {
 		commandBody.put("coffee_machine_id", machine.getID());
 		commandBody.put("orderID", order.getOrderID());
 		commandBody.put("DrinkName", order.getDrink());
-		commandBody.put("Requesttype", "SOMETHING"); //NEEDS TO BE FIXED
-		JSONArray condimentsArray = new JSONArray();
-		for(int i = 0; i < order.getCondiments().size(); i++) {
-			JSONObject condiment = new JSONObject();
-			condiment.put("Name",order.getCondiment(i).getName());
-			condiment.put("qty", order.getCondiment(i).getQuantity());
-			condimentsArray.add(condiment);
+		if(order.hasCondiments()) {
+			commandBody.put("Requesttype", "Automated"); //NEEDS TO BE FIXED
+			JSONArray condimentsArray = new JSONArray();
+			for(int i = 0; i < order.getCondiments().size(); i++) {
+				JSONObject condiment = new JSONObject();
+				condiment.put("Name",order.getCondiment(i).getName());
+				condiment.put("qty", order.getCondiment(i).getQuantity());
+				condimentsArray.add(condiment);
+			}
+			commandBody.put("Options:", condimentsArray);
+		} else {
+			commandBody.put("Requesttype", "Simple"); //NEEDS TO BE FIXED
 		}
-		commandBody.put("Options:", condimentsArray);
 		jsonCommand.put("command", commandBody);
 		return jsonCommand.toString();
 	}

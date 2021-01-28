@@ -43,7 +43,7 @@ public class TestingMain {
 	
 	public static void main(String[] args) {
 		RequestManager manager = new RequestManager();
-		manager.setSelectionBehavior(new AddressSelectionBehavior());
+		manager.addSelectionStrategy(new AddressSelectionBehavior());
 		String response = manager.handleRequest(jsons[1]);
 		System.out.println(response);
 	}
