@@ -7,12 +7,16 @@ import models.Order;
 
 public class AddressSelectionBehavior implements MachineSelectionStrategy {	
 	@Override
-	public Machine selectMachine(Order order) {
-		List<Machine> machines = DatabaseConnection.getMachinesForOrderByAddress(order);
-		if(machines.size() > 0) {
-			return machines.get(0);
+	public List<Machine> selectMachines(Order order, List<Machine> machines) {
+		ArrayList<Machine> filteredList = new ArrayList<>();
+		
+		for (Machine machine : machines) {
+			if (order.getAddress().equals(machine.getAddress())) {
+				filteredList.add(machine);
+			}
 		}
-		return null;
+		
+		return filteredList;
 	}
 
 }

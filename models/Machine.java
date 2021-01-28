@@ -24,4 +24,8 @@ public class Machine {
 	public List<Capability> getCapabilities(){
 		return this.capabilities;
 	}
+	
+	public Address getAddress() {
+		return this.controller.getAddress();
+	}
 }

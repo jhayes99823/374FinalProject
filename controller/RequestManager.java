@@ -1,4 +1,6 @@
 package controller;
+import java.util.List;
+
 import models.ControllerResponse;
 import models.Machine;
 import models.Order;
@@ -23,8 +25,8 @@ public class RequestManager {
 		return appResponse;
 	}
 
-	public Machine performSelection(Order order) {
-		return selectionStrategy.selectMachine(order);
+	public Machine performSelection(Order order, List<Machine> machines) {
+		return selectionStrategy.selectMachines(order, machines);
 	}
 
 	public void setSelectionBehavior(MachineSelectionStrategy selectionStrategy) {

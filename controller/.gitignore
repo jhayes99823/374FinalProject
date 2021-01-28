@@ -11,3 +11,4 @@
 /DatabaseConnection.class
 /MachineSelectionStrategy.class
 /AddressSelectionBehavior.class
+/QueueSelectionBehavior.class
