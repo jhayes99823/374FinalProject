@@ -4,7 +4,7 @@ import models.Machine;
 import models.Order;
 
 public class RequestManager {
-	MachineSelectionBehavior selectionBehavior;
+	MachineSelectionStrategy selectionStrategy;
 	NotificationManager notificationManager;
 
 	public String handleRequest(String json) {
@@ -24,10 +24,10 @@ public class RequestManager {
 	}
 
 	public Machine performSelection(Order order) {
-		return selectionBehavior.selectMachine(order);
+		return selectionStrategy.selectMachine(order);
 	}
 
-	public void setSelectionBehavior(MachineSelectionBehavior selectionBehavior) {
-		this.selectionBehavior = selectionBehavior;
+	public void setSelectionBehavior(MachineSelectionStrategy selectionStrategy) {
+		this.selectionStrategy = selectionStrategy;
 	}
 }

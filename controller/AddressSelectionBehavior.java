@@ -5,10 +5,10 @@ import java.util.List;
 import models.Machine;
 import models.Order;
 
-public class ConcreteSelectionBehavior implements MachineSelectionBehavior {	
+public class AddressSelectionBehavior implements MachineSelectionStrategy {	
 	@Override
 	public Machine selectMachine(Order order) {
-		List<Machine> machines = DatabaseConnection.getMachinesForOrder(order);
+		List<Machine> machines = DatabaseConnection.getMachinesForOrderByAddress(order);
 		if(machines.size() > 0) {
 			return machines.get(0);
 		}

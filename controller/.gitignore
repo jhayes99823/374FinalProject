@@ -9,3 +9,5 @@
 /Subject.class
 /RequestManager.class
 /DatabaseConnection.class
+/MachineSelectionStrategy.class
+/AddressSelectionBehavior.class

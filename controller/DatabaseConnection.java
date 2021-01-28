@@ -16,7 +16,7 @@ public class DatabaseConnection {
 	private static final Map<String, List<Machine>> db = new HashMap<String, List<Machine>>();
 	
 	public DatabaseConnection() {
-
+		
 	}
 	
 	public static void setUpData() {
@@ -35,7 +35,7 @@ public class DatabaseConnection {
 		db.put(addr1, addr1Machines);
 	}
 	
-	public static List<Machine> getMachinesForOrder(Order order) {
+	public static List<Machine> getMachinesForOrderByAddress(Order order) {
 		DatabaseConnection.setUpData();
 		
 		int zip = order.getAddress().getZIP();
