@@ -27,9 +27,9 @@ public class NotificationManager extends Subject {
 	}
 
 	@Override
-	public void notifyObservers(Order order, Machine macine) {
+	public void notifyObservers(Order order, Machine machine) {
 		for (Observer observer : observers) {
-			observer.notify(order, macine);
+			observer.notify(order, machine);
 		}
 	}
 	
