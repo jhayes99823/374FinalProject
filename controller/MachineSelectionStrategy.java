@@ -1,7 +1,9 @@
 package controller;
+import java.util.List;
+
 import models.Machine;
 import models.Order;
 
 public interface MachineSelectionStrategy {
-	public Machine selectMachine(Order order);
+	public List<Machine> selectMachines(Order order, List<Machine> machines);
 }

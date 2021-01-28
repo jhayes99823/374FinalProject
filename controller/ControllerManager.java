@@ -1,5 +1,9 @@
 package controller;
 
+import java.util.List;
+
+import models.Machine;
+
 public class ControllerManager {
 	private static final int WAIT_TIME = 3;
 	
@@ -64,5 +68,10 @@ public class ControllerManager {
 			output[0] = "{\"drinkresponse\":{\"orderID\":"+orderId+",\"status\":1,\"errordesc\":\"Machine not responding.\",\"errorcode\":1}}";
 		}
 		return output[0];
+	}
+	
+	public static List<Machine> getMachinesByQueueSizes() {
+		
+		return null;
 	}
 }

@@ -4,7 +4,7 @@ import models.Machine;
 import models.Order;
 
 public class RequestManager {
-	MachineSelectionStrategy selectionStrategy;
+	MachineSelectionBehavior selectionStrategy;
 	NotificationManager notificationManager;
 
 	public String handleRequest(String json) {
