@@ -30,6 +30,10 @@ public class Machine {
 		return this.controller.getAddress();
 	}
 	
+	public boolean hasCapability(Capability capability) {
+		return capabilities.contains(capability);
+	}
+
 	public int getNumberOfOrder() {
 		return this.numberOfOrders;
 	}
