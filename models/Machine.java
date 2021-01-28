@@ -6,7 +6,7 @@ public class Machine {
 	private int id;
 	private CoffeeController controller;
 	private List<Capability> capabilities;
-	private int numberOfOrders = 5;
+	private int numberOfOrders = 0;
 
 	public Machine(int id, CoffeeController controller, List<Capability> capabilities) {
 		this.id = id;
@@ -25,13 +25,17 @@ public class Machine {
 	public List<Capability> getCapabilities() {
 		return this.capabilities;
 	}
-	
+
 	public Address getAddress() {
 		return this.controller.getAddress();
 	}
-	
+
 	public boolean hasCapability(Capability capability) {
 		return capabilities.contains(capability);
+	}
+
+	public void setNumberOfOrder(int number) {
+		this.numberOfOrders = number;
 	}
 
 	public int getNumberOfOrder() {
