@@ -5,4 +5,11 @@
 /ControllerResponse.class
 /Machine.class
 /Order.class
+<<<<<<< Updated upstream
 /Controller.class
+=======
+/Recipe.class
+/DecoratorRecipe.class
+/SteamStep.class
+/AddStep.class
+>>>>>>> Stashed changes
