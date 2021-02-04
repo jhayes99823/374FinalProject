@@ -1,5 +1,6 @@
 package models;
 
+import recipes.NullStep;
 import recipes.Recipe;
 
 public class Drink {
@@ -10,6 +11,11 @@ public class Drink {
 	public Drink(String name, Recipe recipe) {
 		this.name = name;
 		this.recipe = recipe;
+	}
+	
+	public Drink(String name) {
+		this.name = name;
+		this.recipe = new NullStep();
 	}
 
 	public String getName() {
