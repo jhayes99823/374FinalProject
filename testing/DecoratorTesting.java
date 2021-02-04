@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import models.Capability;
 import recipes.AddStep;
 import recipes.MixStep;
 import recipes.NullStep;
@@ -20,6 +21,7 @@ class DecoratorTesting {
 		Recipe recipe = new NullStep();
 		JSONArray expected = new JSONArray();
 		assertEquals(expected, recipe.getRecipeSteps());
+		assertEquals(Capability.Simple, recipe.getCapabilityRequirement());
 	}
 	
 	@Test
@@ -31,6 +33,7 @@ class DecoratorTesting {
 		step1.put("object", "coffee");
 		expected.add(step1);
 		assertEquals(expected, recipe.getRecipeSteps());
+		assertEquals(Capability.Programmable, recipe.getCapabilityRequirement());
 	}
 	
 	@Test
@@ -42,6 +45,7 @@ class DecoratorTesting {
 		step1.put("object", "milk");
 		expected.add(step1);
 		assertEquals(expected, recipe.getRecipeSteps());
+		assertEquals(Capability.Programmable, recipe.getCapabilityRequirement());
 	}
 	
 	@Test
@@ -52,6 +56,7 @@ class DecoratorTesting {
 		step1.put("commandstep", "mix");
 		expected.add(step1);
 		assertEquals(expected, recipe.getRecipeSteps());
+		assertEquals(Capability.Programmable, recipe.getCapabilityRequirement());
 	}
 	
 	@Test
@@ -63,6 +68,7 @@ class DecoratorTesting {
 		step1.put("object", "whipped cream");
 		expected.add(step1);
 		assertEquals(expected, recipe.getRecipeSteps());
+		assertEquals(Capability.Programmable, recipe.getCapabilityRequirement());
 	}
 
 	@Test
@@ -82,5 +88,6 @@ class DecoratorTesting {
 		step3.put("object", "whipped cream");
 		expected.add(step3);
 		assertEquals(expected, recipe.getRecipeSteps());
+		assertEquals(Capability.Programmable, recipe.getCapabilityRequirement());
 	}
 }
