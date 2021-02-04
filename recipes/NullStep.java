@@ -2,7 +2,9 @@ package recipes;
 
 import org.json.simple.JSONArray;
 
-public class NullStep extends Recipe {
+import models.Capability;
+
+public class NullStep implements Recipe {
 
 	public NullStep() {
 	}
@@ -10,6 +12,11 @@ public class NullStep extends Recipe {
 	@Override
 	public JSONArray getRecipeSteps() {
 		return new JSONArray();
+	}
+
+	@Override
+	public Capability getCapabilityRequirement() {
+		return Capability.Simple;
 	}
 
 }

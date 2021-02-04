@@ -1,49 +1,12 @@
 package controller;
- import java.util.ArrayList;
-import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-
-import models.Address;
-import models.Condiment;
 import models.ControllerResponse;
 import models.Machine;
 import models.Order;
 
 public class JSONManager {
-
-	public static Order parseOrderInput(String json) {
-		JSONObject jsonObject = (JSONObject) JSONValue.parse(json);
-		jsonObject = (JSONObject) jsonObject.get("order");
-		int orderID = (int)(long)jsonObject.get("orderID");
-		String streetAddress = (String)((JSONObject)jsonObject.get("address")).get("street");
-		int zipAddress = (int)(long)((JSONObject)jsonObject.get("address")).get("ZIP");
-		Address address = new Address(streetAddress, zipAddress);
-		String drink = (String)jsonObject.get("drink");
-		JSONArray condimentsArray = (JSONArray)jsonObject.get("condiments");
-		List<Condiment> condiments = new ArrayList<Condiment>();
-		if(condimentsArray!=null) {
-			for (int i = 0; i < condimentsArray.size(); i++) {
-				String condimentName = (String) ((JSONObject) condimentsArray.get(i)).get("name");
-				int condimentQty = (int) (long) ((JSONObject) condimentsArray.get(i)).get("qty");
-				condiments.add(new Condiment(condimentName, condimentQty));
-			}
-		}
-		return new Order(orderID, address, drink, condiments);
-	}
-	
-	public static ControllerResponse parseControllerResponse(String json) {
-		JSONObject jsonObject = (JSONObject) JSONValue.parse(json);
-		jsonObject = (JSONObject) jsonObject.get("drinkresponse");
-		int orderID = (int)(long)jsonObject.get("orderID");
-		int status = (int)(long)jsonObject.get("status");
-		String errordesc = (String)jsonObject.get("errordesc");
-		Object obj = jsonObject.get("errorcode");
-		int errorcode = obj==null ? -1 : (int)(long) obj;
-		return new ControllerResponse(orderID, status, errordesc, errorcode);
-	}
 	public static String createCommmandStream(Order order, Machine machine) {
 		JSONObject jsonCommand = new JSONObject();
 		JSONObject commandBody = new JSONObject();
