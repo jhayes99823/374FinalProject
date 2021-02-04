@@ -4,9 +4,8 @@ public abstract class DecoratorRecipe extends Recipe {
 	protected Recipe prevRecipe;
 	protected String ingredient;
 
-	public DecoratorRecipe(Recipe prevRecipe, String ingredient) {
+	public DecoratorRecipe(Recipe prevRecipe) {
 		this.prevRecipe = prevRecipe;
-		this.ingredient = ingredient;
 	}
 
 	public void setPreviousRecipe(Recipe recipe) {

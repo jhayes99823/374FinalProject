@@ -1,18 +1,17 @@
 package recipes;
 
-import java.util.List;
-
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class MixStep extends DecoratorRecipe {
 
-	public MixStep(Recipe prevRecipe, String ingredient) {
-		super(prevRecipe, null);
+	public MixStep(Recipe prevRecipe) {
+		super(prevRecipe);
 	}
 
 	@Override
-	public List<JSONObject> addRecipeStep() {
-		List<JSONObject> completedSteps = this.prevRecipe.addRecipeStep();
+	public JSONArray getRecipeSteps() {
+		JSONArray completedSteps = this.prevRecipe.getRecipeSteps();
 
 		JSONObject nextRecipeStep = new JSONObject();
 		nextRecipeStep.put("commandstep", "mix");

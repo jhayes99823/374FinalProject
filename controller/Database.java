@@ -10,27 +10,32 @@ import models.Capability;
 import models.Controller;
 import models.ControllerType;
 import models.Machine;
+import recipes.AddStep;
+import recipes.MixStep;
+import recipes.Recipe;
+import recipes.SteamStep;
+import recipes.TopStep;
 
 public class Database {
 	private static Database instance;
 	
 	private List<Machine> machines;
-	private Map<String, List<String>> drinkRecipes;
+	private Map<String, List<Recipe>> drinkRecipes;
 
 	private Database() {
 		// Setup drinkRecipies
-		drinkRecipes = new HashMap<String, List<String>>();
-		List<String> latteRecipe = new ArrayList<String>();
-		latteRecipe.add("Steam milk");
-		latteRecipe.add("Add espresso");
-		latteRecipe.add("Top whipped cream");
+		drinkRecipes = new HashMap<String, List<Recipe>>();
+		List<Recipe> latteRecipe = new ArrayList<Recipe>();
+		latteRecipe.add(new SteamStep(null, "milk"));
+		latteRecipe.add(new AddStep(null, "espresso"));
+		latteRecipe.add(new TopStep(null, "whipped cream"));
 		drinkRecipes.put("Latte", latteRecipe);
-		List<String> pumpkinSpiceRecipe = new ArrayList<String>();
-		pumpkinSpiceRecipe.add("Add coffee");
-		pumpkinSpiceRecipe.add("Add pumpkin spice");
-		pumpkinSpiceRecipe.add("Add cream");
-		pumpkinSpiceRecipe.add("Mix");
-		pumpkinSpiceRecipe.add("Top nutmeg");
+		List<Recipe> pumpkinSpiceRecipe = new ArrayList<Recipe>();
+		pumpkinSpiceRecipe.add(new AddStep(null, "coffee"));
+		pumpkinSpiceRecipe.add(new AddStep(null, "pumpkin spice"));
+		pumpkinSpiceRecipe.add(new AddStep(null, "cream"));
+		pumpkinSpiceRecipe.add(new MixStep(null));
+		pumpkinSpiceRecipe.add(new TopStep(null, "nutmeg"));
 		drinkRecipes.put("Pumpkin Spice", pumpkinSpiceRecipe);
 		// Setup controllers
 		Controller controller1 = new Controller(1, ControllerType.Advanced, new Address("200 N Main", 47803));
@@ -71,7 +76,7 @@ public class Database {
 		return drinkRecipes.containsKey(drinkName);
 	}
 	
-	public List<String> getRecipe(String drinkName) {
+	public List<Recipe> getRecipe(String drinkName) {
 		return drinkRecipes.get(drinkName);
 	}
 

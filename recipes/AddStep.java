@@ -1,23 +1,24 @@
 package recipes;
 
-import java.util.List;
-
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class AddStep extends DecoratorRecipe {
 
+	private String ingredient;
+	
 	public AddStep(Recipe prevRecipe, String ingredient) {
-		super(prevRecipe, ingredient);
+		super(prevRecipe);
+		this.ingredient = ingredient;
 	}
 
 	@Override
-	public List<JSONObject> addRecipeStep() {
-		List<JSONObject> completedSteps = this.prevRecipe.addRecipeStep();
+	public JSONArray getRecipeSteps() {
+		JSONArray completedSteps = this.prevRecipe.getRecipeSteps();
 
 		JSONObject nextRecipeStep = new JSONObject();
 		nextRecipeStep.put("commandstep", "add");
 		nextRecipeStep.put("object", this.ingredient);
-
 		completedSteps.add(nextRecipeStep);
 
 		return completedSteps;

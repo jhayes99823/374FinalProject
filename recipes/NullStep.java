@@ -1,19 +1,15 @@
 package recipes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 public class NullStep extends Recipe {
 
 	public NullStep() {
-		super();
 	}
 
-	public List<JSONObject> addRecipeStep() {
-
-		return new ArrayList<JSONObject>();
+	@Override
+	public JSONArray getRecipeSteps() {
+		return new JSONArray();
 	}
 
 }
