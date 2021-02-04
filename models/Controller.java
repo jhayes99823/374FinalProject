@@ -1,13 +1,13 @@
 package models;
 
 
-public class CoffeeController {
+public class Controller {
 	private int id;
-	private String type;
+	private ControllerType type;
 	private Address address;
 	
 	
-	public CoffeeController(int id, String type, Address address) {
+	public Controller(int id, ControllerType type, Address address) {
 		this.id = id;
 		this.type = type;
 		this.address = address;
@@ -17,7 +17,7 @@ public class CoffeeController {
 		return this.id;
 	}
 	
-	public String getType() {
+	public ControllerType getType() {
 		return this.type;
 	}
 	

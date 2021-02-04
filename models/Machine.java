@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Machine {
 	private int id;
-	private CoffeeController controller;
+	private Controller controller;
 	private List<Capability> capabilities;
 	private int numberOfOrders = 0;
 
-	public Machine(int id, CoffeeController controller, List<Capability> capabilities) {
+	public Machine(int id, Controller controller, List<Capability> capabilities) {
 		this.id = id;
 		this.controller = controller;
 		this.capabilities = capabilities;
@@ -18,7 +18,7 @@ public class Machine {
 		return this.id;
 	}
 
-	public CoffeeController getController() {
+	public Controller getController() {
 		return this.controller;
 	}
 
