@@ -23,29 +23,34 @@ public abstract class DrinkFactory {
 	public static Recipe createRecipe(String drinkName, JSONArray recipeSteps) {		
 		Database db = Database.getInstance();
 		Recipe recipe = new NullStep();
+		
 		List<DecoratorRecipe> defaultSteamSteps = db.getRecipe(drinkName, "steam");
 		for(int i = 0; i < defaultSteamSteps.size(); i++) {
 			defaultSteamSteps.get(i).setPreviousRecipe(recipe);
 			recipe = defaultSteamSteps.get(i);
 		}
+		
 		// ADD CODE FOR PARSING STEAM RECIPE STEPS HERE
 		List<DecoratorRecipe> defaultAddSteps = db.getRecipe(drinkName, "add");
-		for(int i = 0; i < defaultSteamSteps.size(); i++) {
-			defaultSteamSteps.get(i).setPreviousRecipe(recipe);
-			recipe = defaultSteamSteps.get(i);
+		for(int i = 0; i < defaultAddSteps.size(); i++) {
+			defaultAddSteps.get(i).setPreviousRecipe(recipe);
+			recipe = defaultAddSteps.get(i);
 		}
+		
 		// ADD CODE FOR PARSING ADD RECIPE STEPS HERE
 		List<DecoratorRecipe> defaultMixSteps = db.getRecipe(drinkName, "mix");
-		for(int i = 0; i < defaultSteamSteps.size(); i++) {
-			defaultSteamSteps.get(i).setPreviousRecipe(recipe);
-			recipe = defaultSteamSteps.get(i);
+		for(int i = 0; i < defaultMixSteps.size(); i++) {
+			defaultMixSteps.get(i).setPreviousRecipe(recipe);
+			recipe = defaultMixSteps.get(i);
 		}
+		
 		// ADD CODE FOR PARSING MIX RECIPE STEPS HERE
 		List<DecoratorRecipe> defaultTopSteps = db.getRecipe(drinkName, "top");
-		for(int i = 0; i < defaultSteamSteps.size(); i++) {
-			defaultSteamSteps.get(i).setPreviousRecipe(recipe);
-			recipe = defaultSteamSteps.get(i);
+		for(int i = 0; i < defaultTopSteps.size(); i++) {
+			defaultTopSteps.get(i).setPreviousRecipe(recipe);
+			recipe = defaultTopSteps.get(i);
 		}
+		
 		// ADD CODE FOR PARSING TOP RECIPE STEPS HERE
 		
 //		for (int i = 0; i < recipeSteps.size(); i++) {
