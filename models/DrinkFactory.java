@@ -18,13 +18,14 @@ import recipes.Recipe;
 
 public abstract class DrinkFactory {
 	
-	private static Recipe getRecipe(String drinkName, JSONArray recipeSteps) {
-		List<Recipe> dbRecipes = Database.getInstance().getRecipe(drinkName);
-		
+	private static Recipe getRecipe(String drinkName, JSONArray recipeSteps) {		
+		Database db = Database.getInstance();
 		Recipe recipe;
 				
-		for (int i = 0; i < dbRecipes.size(); i++) {
+		for (int i = 0; i < recipeSteps.size(); i++) {
+			JSONObject currRecipeStep = (JSONObject) recipeSteps.get(0);
 			
+//			if (db.hasRecipe(drinkName, currRecipeStep))
 		}
 		
 		return null;
