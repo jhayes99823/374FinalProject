@@ -31,7 +31,7 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Order order = new Order(0, null, "Test Drink", null);
+		Order order = new Order(0, null, null, null);
 
 		notifications.notifyObservers(order, machine0);
 
@@ -56,7 +56,7 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Order order = new Order(0, null, "Test Drink", null);
+		Order order = new Order(0, null, null, null);
 
 		notifications.notifyObservers(order, machine0);
 
@@ -80,7 +80,7 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Order order = new Order(0, null, "Test Drink", null);
+		Order order = new Order(0, null, null, null);
 
 		notifications.notifyObservers(order, machine0);
 

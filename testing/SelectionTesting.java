@@ -25,7 +25,7 @@ class SelectionTesting {
 	@Test
 	void testAddressSelection() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Order order = new Order(0, new Address("123 Address St.", 11111), "Coffee", condiments);
+		Order order = new Order(0, new Address("123 Address St.", 11111), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -58,7 +58,7 @@ class SelectionTesting {
 	@Test
 	void testTypeSelectionSimple() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Order order = new Order(0, new Address("123 Address St.", 11111), "Coffee", condiments);
+		Order order = new Order(0, new Address("123 Address St.", 11111), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -93,7 +93,7 @@ class SelectionTesting {
 	void testTypeSelectionAutomated() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
 		condiments.add(new Condiment("Cream", 1));
-		Order order = new Order(0, new Address("123 Address St.", 11111), "Coffee", condiments);
+		Order order = new Order(0, new Address("123 Address St.", 11111), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -126,7 +126,7 @@ class SelectionTesting {
 	@Test
 	void testQueueSelectionEmpty() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Order order = new Order(0, new Address("123 Address St.", 11111), "Coffee", condiments);
+		Order order = new Order(0, new Address("123 Address St.", 11111), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -160,7 +160,7 @@ class SelectionTesting {
 	@Test
 	void testQueueSelectionOneUsed() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Order order = new Order(0, new Address("123 Address St.", 11111), "Coffee", condiments);
+		Order order = new Order(0, new Address("123 Address St.", 11111), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -194,7 +194,7 @@ class SelectionTesting {
 	@Test
 	void testQueueSelectionAllUsed() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Order order = new Order(0, new Address("123 Address St.", 11111), "Coffee", condiments);
+		Order order = new Order(0, new Address("123 Address St.", 11111), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -231,7 +231,7 @@ class SelectionTesting {
 	@Test
 	void testQueueSelectionMoreFull() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Order order = new Order(0, new Address("123 Address St.", 11111), "Coffee", condiments);
+		Order order = new Order(0, new Address("123 Address St.", 11111), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -266,7 +266,7 @@ class SelectionTesting {
 	@Test
 	void testIfAnySelectionAny() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Order order = new Order(0, new Address("123 Address St.", 11111), "Coffee", condiments);
+		Order order = new Order(0, new Address("123 Address St.", 11111), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -300,7 +300,7 @@ class SelectionTesting {
 	@Test
 	void testIfAnySelectionNone() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Order order = new Order(0, new Address("Fake Address", 99999), "Coffee", condiments);
+		Order order = new Order(0, new Address("Fake Address", 99999), null, condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
