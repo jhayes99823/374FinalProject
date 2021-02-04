@@ -11,8 +11,8 @@ import models.Controller;
 import models.ControllerType;
 import models.Machine;
 import recipes.AddStep;
+import recipes.DecoratorRecipe;
 import recipes.MixStep;
-import recipes.Recipe;
 import recipes.SteamStep;
 import recipes.TopStep;
 
@@ -20,22 +20,34 @@ public class Database {
 	private static Database instance;
 	
 	private List<Machine> machines;
-	private Map<String, List<Recipe>> drinkRecipes;
+	private Map<String, Map<String, List<DecoratorRecipe>>> drinkRecipes;
 
 	private Database() {
 		// Setup drinkRecipies
-		drinkRecipes = new HashMap<String, List<Recipe>>();
-		List<Recipe> latteRecipe = new ArrayList<Recipe>();
-		latteRecipe.add(new SteamStep(null, "milk"));
-		latteRecipe.add(new AddStep(null, "espresso"));
-		latteRecipe.add(new TopStep(null, "whipped cream"));
+		drinkRecipes = new HashMap<String, Map<String, List<DecoratorRecipe>>>();
+		Map<String, List<DecoratorRecipe>> latteRecipe = new HashMap<String, List<DecoratorRecipe>>();
+		List<DecoratorRecipe> latteRecipeSteam = new ArrayList<DecoratorRecipe>();
+		latteRecipeSteam.add(new SteamStep(null, "milk"));
+		latteRecipe.put("steam", latteRecipeSteam);
+		List<DecoratorRecipe> latteRecipeAdd = new ArrayList<DecoratorRecipe>();
+		latteRecipeAdd.add(new AddStep(null, "espresso"));
+		latteRecipe.put("add", latteRecipeAdd);
+		List<DecoratorRecipe> latteRecipeTop = new ArrayList<DecoratorRecipe>();
+		latteRecipeTop.add(new TopStep(null, "whipped cream"));
+		latteRecipe.put("top", latteRecipeTop);
 		drinkRecipes.put("Latte", latteRecipe);
-		List<Recipe> pumpkinSpiceRecipe = new ArrayList<Recipe>();
-		pumpkinSpiceRecipe.add(new AddStep(null, "coffee"));
-		pumpkinSpiceRecipe.add(new AddStep(null, "pumpkin spice"));
-		pumpkinSpiceRecipe.add(new AddStep(null, "cream"));
-		pumpkinSpiceRecipe.add(new MixStep(null));
-		pumpkinSpiceRecipe.add(new TopStep(null, "nutmeg"));
+		Map<String, List<DecoratorRecipe>> pumpkinSpiceRecipe = new HashMap<String, List<DecoratorRecipe>>();
+		List<DecoratorRecipe> pumpkinSpiceRecipeAdd = new ArrayList<DecoratorRecipe>();
+		pumpkinSpiceRecipeAdd.add(new AddStep(null, "coffee"));
+		pumpkinSpiceRecipeAdd.add(new AddStep(null, "pumpkin spice"));
+		pumpkinSpiceRecipeAdd.add(new AddStep(null, "cream"));
+		pumpkinSpiceRecipe.put("add", pumpkinSpiceRecipeAdd);
+		List<DecoratorRecipe> pumpkinSpiceRecipeMix = new ArrayList<DecoratorRecipe>();
+		pumpkinSpiceRecipeMix.add(new MixStep(null));
+		pumpkinSpiceRecipe.put("mix", pumpkinSpiceRecipeMix);
+		List<DecoratorRecipe> pumpkinSpiceRecipeTop = new ArrayList<DecoratorRecipe>();
+		pumpkinSpiceRecipeTop.add(new TopStep(null, "nutmeg"));
+		pumpkinSpiceRecipe.put("top", pumpkinSpiceRecipeTop);
 		drinkRecipes.put("Pumpkin Spice", pumpkinSpiceRecipe);
 		// Setup controllers
 		Controller controller1 = new Controller(1, ControllerType.Advanced, new Address("200 N Main", 47803));
@@ -76,8 +88,12 @@ public class Database {
 		return drinkRecipes.containsKey(drinkName);
 	}
 	
-	public List<Recipe> getRecipe(String drinkName) {
-		return drinkRecipes.get(drinkName);
+	public boolean hasRecipe(String drinkName, String stepName) {
+		return hasRecipe(drinkName) && drinkRecipes.get(drinkName).containsKey(stepName);
+	}
+	
+	public List<DecoratorRecipe> getRecipe(String drinkName, String stepName) {
+		return drinkRecipes.get(drinkName).get(stepName);
 	}
 
 }
