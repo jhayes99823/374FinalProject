@@ -38,4 +38,14 @@ public class Order {
 	public Condiment getCondiment(int index) {
 		return this.condiments.get(index);
 	}
+
+	public Capability getCapabilityRequirement() {
+		if (drink.getCapabilityRequirement() == Capability.Programmable) {
+			return Capability.Programmable;
+		} else if (!condiments.isEmpty()) {
+			return Capability.Automated;
+		} else {
+			return Capability.Simple;
+		}
+	}
 }
