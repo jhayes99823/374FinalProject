@@ -1,5 +1,7 @@
 package models;
 
+import org.json.simple.JSONObject;
+
 import recipes.NullStep;
 import recipes.Recipe;
 
@@ -36,5 +38,12 @@ public class Drink {
 	
 	public Capability getCapabilityRequirement() {
 		return this.recipe.getCapabilityRequirement();
+	}
+	
+	public JSONObject toJSON() {
+		JSONObject drinkJSON = new JSONObject();
+		drinkJSON.put("drink", name);
+		drinkJSON.put("recipe", recipe.getRecipeSteps());
+		return drinkJSON;
 	}
 }

@@ -22,7 +22,7 @@ public abstract class OrderFactory {
 		int ID = ((Long)orderInput.get(ORDER_ID_KEY)).intValue();
 		JSONObject addressInput = (JSONObject)orderInput.get(ORDER_ADDRESS_KEY);
 		Address address = OrderFactory.createAddress(addressInput);
-		Drink drink = null; //DrinkFactory.createDrink(orderInput);
+		Drink drink = DrinkFactory.createDrink(orderInput);
 		JSONArray condimentsArray = (JSONArray)orderInput.get(ORDER_CONDIMENTS_KEY);
 		List<Condiment> condiments = OrderFactory.createCondiments(condimentsArray);
 		return new Order(ID, address, drink, condiments);
