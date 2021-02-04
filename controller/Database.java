@@ -11,11 +11,11 @@ import models.CoffeeController;
 import models.Machine;
 import models.Order;
 
-public class DatabaseConnection {
+public class Database {
 	private static final String CONNECTION = "TEST_CONN";
 	private static final Map<String, List<Machine>> db = new HashMap<String, List<Machine>>();
 	
-	public DatabaseConnection() {
+	public Database() {
 		
 	}
 	
@@ -36,7 +36,7 @@ public class DatabaseConnection {
 	}
 	
 	public static List<Machine> getMachinesForOrderByAddress(Order order) {
-		DatabaseConnection.setUpData();
+		Database.setUpData();
 		
 		int zip = order.getAddress().getZIP();
 		String street = order.getAddress().getStreet();

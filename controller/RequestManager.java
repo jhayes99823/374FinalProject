@@ -26,7 +26,7 @@ public class RequestManager {
 	}
 
 	public List<Machine> performSelection(Order order) {
-		List<Machine> machines = DatabaseConnection.getMachines();
+		List<Machine> machines = Database.getMachines();
 		for(MachineSelectionStrategy strategy : selectionStrategies) {
 			machines = strategy.selectMachines(order, machines);
 		}
