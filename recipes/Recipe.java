@@ -2,6 +2,9 @@ package recipes;
 
 import org.json.simple.JSONArray;
 
-public abstract class Recipe {
-	public abstract JSONArray getRecipeSteps();
+import models.Capability;
+
+public interface Recipe {
+	public JSONArray getRecipeSteps();
+	public Capability getCapabilityRequirement();
 }

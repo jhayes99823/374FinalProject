@@ -3,6 +3,8 @@ package recipes;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import models.Capability;
+
 public class MixStep extends DecoratorRecipe {
 
 	public MixStep(Recipe prevRecipe) {
@@ -15,10 +17,8 @@ public class MixStep extends DecoratorRecipe {
 
 		JSONObject nextRecipeStep = new JSONObject();
 		nextRecipeStep.put("commandstep", "mix");
-
 		completedSteps.add(nextRecipeStep);
 
 		return completedSteps;
 	}
-
 }
