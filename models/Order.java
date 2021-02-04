@@ -5,10 +5,10 @@ import java.util.List;
 public class Order {
 	private int orderID;
 	private Address address;
-	private String drink;
+	private Drink drink;
 	private List<Condiment> condiments;
 
-	public Order(int orderID, Address address, String drink, List<Condiment> condiments) {
+	public Order(int orderID, Address address, Drink drink, List<Condiment> condiments) {
 		this.orderID = orderID;
 		this.address = address;
 		this.drink = drink;
@@ -23,7 +23,7 @@ public class Order {
 		return this.address;
 	}
 
-	public String getDrink() {
+	public Drink getDrink() {
 		return this.drink;
 	}
 

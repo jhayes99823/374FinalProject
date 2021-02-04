@@ -9,7 +9,7 @@ import recipes.Recipe;
 
 public abstract class DrinkFactory {
 	public static Recipe getRecipe(JSONObject drinkObj) {
-		List<Recipe> recipes = Database.getInstance().getRecipe(drinkObj);
+		List<Recipe> recipes = Database.getInstance().getRecipe(drinkObj.get("drink"));
 		
 		return null;
 	}
