@@ -19,15 +19,13 @@ import models.ControllerType;
 import models.Drink;
 import models.Condiment;
 import models.Machine;
-import models.Order;
 
 class SelectionTesting {
 
 	@Test
 	void testAddressSelection() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("123 Address St.", 11111), drink, condiments);
+		Drink drink = new Drink(0, new Address("123 Address St.", 11111), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -45,7 +43,7 @@ class SelectionTesting {
 		
 		MachineSelectionStrategy selection = new AddressSelectionBehavior();
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine0);
@@ -60,8 +58,7 @@ class SelectionTesting {
 	@Test
 	void testTypeSelectionSimple() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("123 Address St.", 11111), drink, condiments);
+		Drink drink = new Drink(0, new Address("123 Address St.", 11111), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -79,7 +76,7 @@ class SelectionTesting {
 		
 		MachineSelectionStrategy selection = new MachineTypeSelectionBehavior();
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine0);
@@ -96,8 +93,7 @@ class SelectionTesting {
 	void testTypeSelectionAutomated() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
 		condiments.add(new Condiment("Cream", 1));
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("123 Address St.", 11111), drink, condiments);
+		Drink drink = new Drink(0, new Address("123 Address St.", 11111), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -115,7 +111,7 @@ class SelectionTesting {
 		
 		MachineSelectionStrategy selection = new MachineTypeSelectionBehavior();
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine0);
@@ -130,8 +126,7 @@ class SelectionTesting {
 	@Test
 	void testQueueSelectionEmpty() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("123 Address St.", 11111), drink, condiments);
+		Drink drink = new Drink(0, new Address("123 Address St.", 11111), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -149,7 +144,7 @@ class SelectionTesting {
 		
 		MachineSelectionStrategy selection = new MinQueueSelectionBehavior();
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine0);
@@ -165,8 +160,7 @@ class SelectionTesting {
 	@Test
 	void testQueueSelectionOneUsed() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("123 Address St.", 11111), drink, condiments);
+		Drink drink = new Drink(0, new Address("123 Address St.", 11111), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -185,7 +179,7 @@ class SelectionTesting {
 		
 		MachineSelectionStrategy selection = new MinQueueSelectionBehavior();
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine1);
@@ -200,8 +194,7 @@ class SelectionTesting {
 	@Test
 	void testQueueSelectionAllUsed() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("123 Address St.", 11111), drink, condiments);
+		Drink drink = new Drink(0, new Address("123 Address St.", 11111), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -222,7 +215,7 @@ class SelectionTesting {
 		
 		MachineSelectionStrategy selection = new MinQueueSelectionBehavior();
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine0);
@@ -238,8 +231,7 @@ class SelectionTesting {
 	@Test
 	void testQueueSelectionMoreFull() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("123 Address St.", 11111), drink, condiments);
+		Drink drink = new Drink(0, new Address("123 Address St.", 11111), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -260,7 +252,7 @@ class SelectionTesting {
 		
 		MachineSelectionStrategy selection = new MinQueueSelectionBehavior();
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine1);
@@ -274,8 +266,7 @@ class SelectionTesting {
 	@Test
 	void testIfAnySelectionAny() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("123 Address St.", 11111), drink, condiments);
+		Drink drink = new Drink(0, new Address("123 Address St.", 11111), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -294,7 +285,7 @@ class SelectionTesting {
 		MachineSelectionStrategy selection = new AddressSelectionBehavior();
 		selection = new IfAnySelectionBehavior(selection);
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine0);
@@ -309,8 +300,7 @@ class SelectionTesting {
 	@Test
 	void testIfAnySelectionNone() {
 		List<Condiment> condiments = new ArrayList<Condiment>();
-		Drink drink = new Drink("Test Drink");
-		Order order = new Order(0, new Address("Fake Address", 99999), drink, condiments);
+		Drink drink = new Drink(0, new Address("Fake Address", 99999), "Test Drink", condiments);
 		Controller controllerA = new Controller(0, ControllerType.Simple, new Address("123 Address St.", 11111));
 		Controller controllerB = new Controller(1, ControllerType.Simple, new Address("Other Road St.", 55555));
 		List<Machine> machines = new ArrayList<Machine>();
@@ -329,7 +319,7 @@ class SelectionTesting {
 		MachineSelectionStrategy selection = new AddressSelectionBehavior();
 		selection = new IfAnySelectionBehavior(selection);
 		
-		List<Machine> result = selection.selectMachines(order, machines);
+		List<Machine> result = selection.selectMachines(drink, machines);
 		
 		List<Machine> expectedResult = new ArrayList<Machine>();
 		expectedResult.add(machine0);

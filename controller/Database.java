@@ -18,7 +18,7 @@ import recipes.TopStep;
 
 public class Database {
 	private static Database instance;
-	
+
 	private List<Machine> machines;
 	private Map<String, Map<String, List<DecoratorRecipe>>> drinkRecipes;
 
@@ -83,17 +83,21 @@ public class Database {
 	public List<Machine> getMachines() {
 		return machines;
 	}
-	
+
 	public boolean hasRecipe(String drinkName) {
 		return drinkRecipes.containsKey(drinkName);
 	}
-	
+
 	public boolean hasRecipe(String drinkName, String stepName) {
 		return hasRecipe(drinkName) && drinkRecipes.get(drinkName).containsKey(stepName);
 	}
-	
+
 	public List<DecoratorRecipe> getRecipe(String drinkName, String stepName) {
-		return drinkRecipes.get(drinkName).get(stepName);
+		if (!hasRecipe(drinkName, stepName)) {
+			return new ArrayList<DecoratorRecipe>();
+		} else {
+			return drinkRecipes.get(drinkName).get(stepName);
+		}
 	}
 
 }

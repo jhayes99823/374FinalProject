@@ -2,8 +2,8 @@ package controller;
 
 import java.util.List;
 
+import models.Drink;
 import models.Machine;
-import models.Order;
 
 public class IfAnySelectionBehavior implements MachineSelectionStrategy {
 
@@ -14,8 +14,8 @@ public class IfAnySelectionBehavior implements MachineSelectionStrategy {
 	}
 
 	@Override
-	public List<Machine> selectMachines(Order order, List<Machine> machines) {
-		List<Machine> strategyMachine = strategy.selectMachines(order, machines);
+	public List<Machine> selectMachines(Drink drink, List<Machine> machines) {
+		List<Machine> strategyMachine = strategy.selectMachines(drink, machines);
 		if (strategyMachine.size() == 0)
 			return machines;
 		return strategyMachine;

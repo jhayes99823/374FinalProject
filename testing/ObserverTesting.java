@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import controller.Barista;
 import controller.NotificationManager;
+import models.Drink;
 import models.Machine;
-import models.Order;
 
 class ObserverTesting {
 
@@ -31,9 +31,9 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Order order = new Order(0, null, null, null);
+		Drink drink = new Drink(0, null, null, null);
 
-		notifications.notifyObservers(order, machine0);
+		notifications.notifyObservers(drink, machine0);
 
 		boolean[] attendingStates = { true, false, false, false };
 		for (int i = 0; i < attendingStates.length; i++) {
@@ -56,9 +56,9 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Order order = new Order(0, null, null, null);
+		Drink drink = new Drink(0, null, null, null);
 
-		notifications.notifyObservers(order, machine0);
+		notifications.notifyObservers(drink, machine0);
 
 		boolean[] attendingStates = { true, false, true, false };
 		for (int i = 0; i < attendingStates.length; i++) {
@@ -80,9 +80,9 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Order order = new Order(0, null, null, null);
+		Drink drink = new Drink(0, null, null, null);
 
-		notifications.notifyObservers(order, machine0);
+		notifications.notifyObservers(drink, machine0);
 
 		boolean[] attendingStates = { true, true, true, true };
 		for (int i = 0; i < attendingStates.length; i++) {

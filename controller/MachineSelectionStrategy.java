@@ -1,9 +1,9 @@
 package controller;
 import java.util.List;
 
+import models.Drink;
 import models.Machine;
-import models.Order;
 
 public interface MachineSelectionStrategy {
-	public List<Machine> selectMachines(Order order, List<Machine> machines);
+	public List<Machine> selectMachines(Drink drink, List<Machine> machines);
 }

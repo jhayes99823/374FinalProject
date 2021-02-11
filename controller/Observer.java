@@ -1,7 +1,7 @@
 package controller;
 import models.Machine;
-import models.Order;
+import models.Drink;
 
 public interface Observer {
-	public void notify(Order order, Machine machine);
+	public void notify(Drink drink, Machine machine);
 }

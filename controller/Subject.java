@@ -2,8 +2,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Drink;
 import models.Machine;
-import models.Order;
 
 public abstract class Subject {
 
@@ -21,9 +21,9 @@ public abstract class Subject {
 		}
 	}
 
-	public void notifyObservers(Order order, Machine machine) {
+	public void notifyObservers(Drink drink, Machine machine) {
 		for (Observer observer : observers) {
-			observer.notify(order, machine);
+			observer.notify(drink, machine);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package models;
 
+import org.json.simple.JSONObject;
 
 public class Address {
 	private String street;
@@ -18,6 +19,13 @@ public class Address {
 		return this.ZIP;
 	}
 
+	public JSONObject toJSON() {
+		JSONObject addressJSON = new JSONObject();
+		addressJSON.put("street", street);
+		addressJSON.put("ZIP", ZIP);
+		return addressJSON;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

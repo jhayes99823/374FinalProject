@@ -1,21 +1,21 @@
 package controller;
 
+import models.Drink;
 import models.Machine;
-import models.Order;
 
 public class Barista implements Observer {
 
 	private Machine workingAt;
-	private Order attendingTo = null;
+	private Drink attendingTo = null;
 
 	public Barista(Machine workingAt) {
 		this.workingAt = workingAt;
 	}
 
 	@Override
-	public void notify(Order order, Machine machine) {
+	public void notify(Drink drink, Machine machine) {
 		if (this.workingAt.equals(machine)) {
-			this.attendingTo = order;
+			this.attendingTo = drink;
 		}
 	}
 

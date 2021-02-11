@@ -5,14 +5,14 @@ import java.util.List;
 
 import models.Capability;
 import models.Machine;
-import models.Order;
+import models.Drink;
 
 public class MachineTypeSelectionBehavior implements MachineSelectionStrategy {
 
 	@Override
-	public List<Machine> selectMachines(Order order, List<Machine> machines) {
+	public List<Machine> selectMachines(Drink drink, List<Machine> machines) {
 		List<Machine> selectedMachines = new ArrayList<Machine>();
-		switch(order.getCapabilityRequirement()) {
+		switch(drink.getCapabilityRequirement()) {
 			case Programmable:
 				for(Machine machine : machines) {
 					if(machine.hasCapability(Capability.Programmable)) {
