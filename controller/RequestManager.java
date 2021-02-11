@@ -16,9 +16,8 @@ public class RequestManager {
 	List<MachineSelectionStrategy> selectionStrategies = new ArrayList<MachineSelectionStrategy>();
 	NotificationManager notificationManager;
 
-	public String handleRequest(String json) {
-		JSONObject drinkJSON = (JSONObject) JSONValue.parse(json);
-		Drink drink = DrinkFactory.createDrink(drinkJSON);
+	public String handleRequest(String orderString) {
+		Drink drink = DrinkFactory.parseOrder(orderString);
 		Machine machine = performSelection(drink).get(0);
 		if (machine == null) {
 			return "No machine found";
@@ -27,9 +26,8 @@ public class RequestManager {
 		// to send request to machine and get
 		// response back
 		String commandStream = JSONManager.createCommmandStream(drink, machine);
-		String controllerRespString = ControllerManager.dispatchCommand(commandStream, drink.getOrderID());
-		JSONObject controllerResponseJSON = (JSONObject) JSONValue.parse(controllerRespString);
-		ControllerResponse controllerResponse = ControllerResponseFactory.createControllerResponse(controllerResponseJSON);
+		String controllerResponseString = ControllerManager.dispatchCommand(commandStream, drink.getOrderID());
+		ControllerResponse controllerResponse = ControllerResponseFactory.parseResponse(controllerResponseString);
 		String appResponse = JSONManager.createAppResponse(controllerResponse, machine);
 		return appResponse;
 	}

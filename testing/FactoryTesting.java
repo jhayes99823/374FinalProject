@@ -5,15 +5,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.junit.jupiter.api.Test;
 
 import models.Capability;
 import models.Condiment;
+import models.ControllerResponse;
+import models.ControllerResponseFactory;
 import models.Drink;
 import models.DrinkFactory;
 import recipes.AddStep;
+import recipes.MixStep;
 import recipes.NullStep;
 import recipes.Recipe;
 import recipes.SteamStep;
@@ -109,5 +110,75 @@ class FactoryTesting {
 		assertEquals(recipe.getRecipeSteps(), drink.getRecipe().getRecipeSteps());
 		assertEquals(Capability.Programmable, drink.getCapabilityRequirement());
 	}
+	
+	@Test
+	void testProgrammableDrinkCustomSteps() {
+		String inputString = "{\r\n" + 
+				"      \"order\": { \"orderID\": 4,\r\n" + 
+				"                \"address\": {\r\n" + 
+				"                      \"street\": \"3 S. Walnut\",\r\n" + 
+				"                      \"ZIP\": 60601\r\n" + 
+				"                },\r\n" + 
+				"                \"drink\": \"Latte\",\r\n" + 
+				"                \"condiments\": [\r\n" + 
+				"                    {\"name\": \"Hazelnut\", \"qty\": 2}\r\n" + 
+				"                ],\r\n" + 
+				"                \"recipe\": [\r\n" + 
+				"                      {\"commandstep\": \"add\", \"object\": \"cream\"},\r\n" + 
+				"                      {\"commandstep\": \"mix\"}\r\n" + 
+				"                ]\r\n" + 
+				"                }\r\n" + 
+				"    }";
+		Drink drink = DrinkFactory.parseOrder(inputString);
+		assertEquals(4, drink.getOrderID());
+		assertEquals("3 S. Walnut", drink.getAddress().getStreet());
+		assertEquals(60601, drink.getAddress().getZIP());
+		assertEquals("Latte", drink.getName());
+		assertTrue(drink.hasCondiments());
+		List<Condiment> condiments = new ArrayList<Condiment>();
+		condiments.add(new Condiment("Hazelnut", 2));
+		for(int i = 0; i < condiments.size(); i++) {
+			assertEquals(condiments.get(i).getName(), drink.getCondiment(i).getName());
+			assertEquals(condiments.get(i).getQuantity(), drink.getCondiment(i).getQuantity());
+		}
+		Recipe recipe = new NullStep();
+		recipe = new SteamStep(recipe, "milk");
+		recipe = new AddStep(recipe, "espresso");
+		recipe = new AddStep(recipe, "cream");
+		recipe = new MixStep(recipe);
+		recipe = new TopStep(recipe, "whipped cream");
+		assertEquals(recipe.getRecipeSteps(), drink.getRecipe().getRecipeSteps());
+		assertEquals(Capability.Programmable, drink.getCapabilityRequirement());
+	}
+	
+	@Test
+	void testControllerResponseFactorySuccess() {
+		String response = "{\r\n" + 
+				"  \"drinkresponse\": {\r\n" + 
+				"    \"orderID\": 1,\r\n" + 
+				"    \"status\": 0\r\n" + 
+				"  }\r\n" + 
+				"}";
+		ControllerResponse controllerReponse = ControllerResponseFactory.parseResponse(response);
+		assertEquals(1, controllerReponse.getOrderID());
+		assertEquals(0, controllerReponse.getStatus());
+	}
 
+	@Test
+	void testControllerResponseFactoryFail() {
+		String response = "{\r\n" + 
+				"  \"drinkresponse\": {\r\n" + 
+				"    \"orderID\": 2,\r\n" + 
+				"    \"status\": 1,\r\n" + 
+				"    \"errordesc\": \"Out of milk, drink cancelled\",\r\n" + 
+				"    \"errorcode\": 2\r\n" + 
+				"  }\r\n" + 
+				"}";
+		ControllerResponse controllerReponse = ControllerResponseFactory.parseResponse(response);
+		assertEquals(2, controllerReponse.getOrderID());
+		assertEquals(1, controllerReponse.getStatus());
+		assertEquals(2, controllerReponse.getErrorCode());
+		assertEquals("Out of milk, drink cancelled", controllerReponse.getErrorDesc());
+	}
+	
 }

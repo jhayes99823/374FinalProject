@@ -31,7 +31,7 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Drink drink = new Drink(0, null, null, null);
+		Drink drink = new Drink(0, null, null);
 
 		notifications.notifyObservers(drink, machine0);
 
@@ -56,7 +56,7 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Drink drink = new Drink(0, null, null, null);
+		Drink drink = new Drink(0, null, null);
 
 		notifications.notifyObservers(drink, machine0);
 
@@ -80,7 +80,7 @@ class ObserverTesting {
 			notifications.addObserver(barista);
 		}
 
-		Drink drink = new Drink(0, null, null, null);
+		Drink drink = new Drink(0, null, null);
 
 		notifications.notifyObservers(drink, machine0);
 

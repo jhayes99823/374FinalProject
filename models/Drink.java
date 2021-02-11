@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -28,6 +29,22 @@ public class Drink {
 		this.address = address;
 		this.name = name;
 		this.condiments = condiments;
+		this.recipe = new NullStep();
+	}
+	
+	public Drink(int orderID, Address address, String name, Recipe recipe) {
+		this.orderID = orderID;
+		this.address = address;
+		this.name = name;
+		this.condiments = new ArrayList<Condiment>();
+		this.recipe = recipe;
+	}
+	
+	public Drink(int orderID, Address address, String name) {
+		this.orderID = orderID;
+		this.address = address;
+		this.name = name;
+		this.condiments = new ArrayList<Condiment>();
 		this.recipe = new NullStep();
 	}
 
