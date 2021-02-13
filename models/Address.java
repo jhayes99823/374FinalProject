@@ -15,8 +15,16 @@ public class Address {
 		return this.street;
 	}
 	
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	
 	public int getZIP() {
 		return this.ZIP;
+	}
+	
+	public void setZIP(int ZIP) {
+		this.ZIP = ZIP;
 	}
 
 	public JSONObject toJSON() {

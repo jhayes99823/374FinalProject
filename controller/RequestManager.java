@@ -14,7 +14,7 @@ import models.Machine;
 
 public class RequestManager {
 	List<MachineSelectionStrategy> selectionStrategies = new ArrayList<MachineSelectionStrategy>();
-	NotificationManager notificationManager;
+	NotificationManager notificationManager = new NotificationManager();
 
 	public String handleRequest(String orderString) {
 		Drink drink = DrinkFactory.parseOrder(orderString);
@@ -28,6 +28,9 @@ public class RequestManager {
 		String commandStream = JSONManager.createCommmandStream(drink, machine);
 		String controllerResponseString = ControllerManager.dispatchCommand(commandStream, drink.getOrderID());
 		ControllerResponse controllerResponse = ControllerResponseFactory.parseResponse(controllerResponseString);
+		if (controllerResponse.getStatus() == 0) {
+			notificationManager.notifyObservers(drink, machine);
+		}
 		String appResponse = JSONManager.createAppResponse(controllerResponse, machine);
 		return appResponse;
 	}
@@ -42,5 +45,13 @@ public class RequestManager {
 
 	public void addSelectionStrategy(MachineSelectionStrategy selectionStrategy) {
 		this.selectionStrategies.add(selectionStrategy);
+	}
+
+	public void clearSelectionStrategy() {
+		this.selectionStrategies.clear();
+	}
+
+	public Subject getSubject() {
+		return this.notificationManager;
 	}
 }

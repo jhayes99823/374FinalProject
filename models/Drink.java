@@ -47,6 +47,10 @@ public class Drink {
 		this.condiments = new ArrayList<Condiment>();
 		this.recipe = new NullStep();
 	}
+	
+	public void incrementOrderID() {
+		orderID++;
+	}
 
 	public int getOrderID() {
 		return this.orderID;
